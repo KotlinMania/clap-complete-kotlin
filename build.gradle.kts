@@ -209,7 +209,11 @@ kotlin {
         binaries.framework { baseName = "ClapComplete"; xcf.add(this) }
     }
     iosSimulatorArm64 {
-        binaries.framework { baseName = "ClapComplete"; xcf.add(this) }
+        binaries.framework {
+            baseName = "ClapComplete"
+            isStatic = true
+            xcf.add(this)
+        }
     }
     iosX64 {
         binaries.framework { baseName = "ClapComplete"; xcf.add(this) }
