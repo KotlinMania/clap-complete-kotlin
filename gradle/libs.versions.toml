@@ -24,7 +24,7 @@ kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serializa
 kotlinx-datetime = { module = "org.jetbrains.kotlinx:kotlinx-datetime", version.ref = "datetime" }
 collections-immutable = { module = "org.jetbrains.kotlinx:kotlinx-collections-immutable", version.ref = "collectionsImmutable" }
 
-clap-kotlin = { module = "io.github.kotlinmania:clap-kotlin", version = "0.1.0" }
+clap-kotlin = { module = "io.github.kotlinmania:clap-kotlin", version = "0.1.1" }
 [bundles]
 clap-complete-commonMain = [
     "kotlinx-coroutines-core",
