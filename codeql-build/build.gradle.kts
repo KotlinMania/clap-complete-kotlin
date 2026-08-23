@@ -171,6 +171,16 @@ fun registerCodeqlCompileTask(
                     .joinToString(File.pathSeparator) { it.absolutePath }
             val commonSourceFiles = commonSources.files.toMutableList()
             val sourceFiles = sources.files.toMutableList()
+
+            val stubClap = dummySourceDir.get().file("io/github/kotlinmania/clap/builder/ClapStub.kt").asFile
+            stubClap.parentFile.mkdirs()
+            stubClap.writeText(
+                "package io.github.kotlinmania.clap.builder\n\n" +
+                    "public class StyledStr\n",
+            )
+            commonSourceFiles.add(stubClap)
+            sourceFiles.add(stubClap)
+
             // If no real sources were found, use the dummy source generated in onlyIf.
             if (commonSourceFiles.isEmpty()) {
                 commonSourceFiles.add(dummySourceFile.get().asFile)
