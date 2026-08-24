@@ -4,14 +4,14 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 1/18 (5.6%)
-- **Function parity:** 14/159 matched (target 15) — 8.8%
-- **Class/type parity:** 1/22 matched (target 1) — 4.5%
-- **Combined symbol parity:** 15/181 matched (target 16) — 8.3%
-- **Average inline-code cosine:** 0.64 (function body across 1 matched files)
-- **Average documentation cosine:** 0.99 (doc text across 1 matched files)
+- **Files Present:** 3/18 (16.7%)
+- **Function parity:** 17/159 matched (target 20) — 10.7%
+- **Class/type parity:** 2/23 matched (target 4) — 8.7%
+- **Combined symbol parity:** 19/182 matched (target 24) — 10.4%
+- **Average inline-code cosine:** 0.59 (function body across 3 matched files)
+- **Average documentation cosine:** 0.63 (doc text across 3 matched files)
 - **Cheat-zeroed Files:** 0
-- **Critical Issues:** 0 files with <0.60 function similarity
+- **Critical Issues:** 1 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
 
@@ -27,7 +27,29 @@ No missing high-value files detected.
 
 Every matched file is listed below with function and type symbol parity.
 
-### 1. engine.candidate
+### 1. shells.shell
+
+- **Target:** `shells.Shell`
+- **Similarity:** 0.13
+- **Dependents:** 2
+- **Priority Score:** 2081208.6
+- **Functions:** 3/10 matched (target 5)
+- **Missing functions:** `fmt`, `value_variants`, `file_name`, `generate`, `try_generate`, `from_env`, `parse_shell_from_path`
+- **Types:** 1/2 matched
+- **Missing types:** `Err`
+
+### 2. lib
+
+- **Target:** `clapcomplete.Lib`
+- **Similarity:** 1.00
+- **Dependents:** 0
+- **Priority Score:** 10100.0
+- **Functions:** 0/0 matched
+- **Missing functions:** _none_
+- **Types:** 0/1 matched
+- **Missing types:** `ReadmeDoctests`
+
+### 3. engine.candidate
 
 - **Target:** `engine.Candidate`
 - **Similarity:** 0.64
@@ -63,5 +85,4 @@ do not treat them as the next implementation target by default.
 | `shells.mod` | `aot.shells.Mod` | 0 | `aot/shells/mod.rs` | `aot/shells/Mod.kt` |
 | `engine.mod` | `engine.Mod` | 0 | `engine/mod.rs` | `engine/Mod.kt` |
 | `env.mod` | `env.Mod` | 0 | `env/mod.rs` | `env/Mod.kt` |
-| `lib` | `Lib` | 0 | `lib.rs` | `Lib.kt` |
 
