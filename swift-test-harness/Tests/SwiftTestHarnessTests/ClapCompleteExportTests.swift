@@ -1,4 +1,4 @@
-import XCTest
+import Testing
 import ClapComplete
 
 // Smoke test for the Kotlin → Swift Export → SPM → swift test pipeline.
@@ -28,8 +28,10 @@ import ClapComplete
 // Add more meaningful per-API tests below as the Swift Export surface
 // grows. For now the import + a single passing assertion is the
 // canary that the pipeline is green for this repo.
-final class ClapCompleteExportTests: XCTestCase {
-    func testSwiftModuleLoads() throws {
-        XCTAssertTrue(true, "ClapComplete swift module imported cleanly")
+@Suite("ClapComplete Swift Export Smoke Tests")
+struct ClapCompleteExportTests {
+    @Test
+    func swiftModuleLoads() {
+        #expect(true, "ClapComplete swift module imported cleanly")
     }
 }
