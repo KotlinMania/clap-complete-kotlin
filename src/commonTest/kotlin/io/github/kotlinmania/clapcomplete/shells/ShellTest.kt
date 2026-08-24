@@ -25,4 +25,13 @@ class ShellTest {
         assertEquals(Shell.PowerShell, Shell.fromShellPath("C:\\Windows\\System32\\powershell.exe"))
         assertNull(Shell.fromShellPath("/opt/custom_shell"))
     }
+
+    @Test
+    fun testShellFromEnv() {
+        assertEquals(Shell.Bash, Shell.fromEnv { key -> if (key == "SHELL") "/bin/bash" else null })
+        assertEquals(Shell.Zsh, Shell.fromEnv { key -> if (key == "SHELL") "/usr/bin/zsh" else null })
+        assertEquals(Shell.Fish, Shell.fromEnv { key -> if (key == "SHELL") "/usr/local/bin/fish" else null })
+        assertNull(Shell.fromEnv { null })
+        assertNull(Shell.fromEnv { key -> if (key == "SHELL") "/opt/custom_shell" else null })
+    }
 }
