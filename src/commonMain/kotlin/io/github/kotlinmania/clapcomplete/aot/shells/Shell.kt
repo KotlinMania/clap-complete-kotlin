@@ -81,6 +81,15 @@ enum class Shell(
 
         fun fromShellPath(path: String): Shell? = parseShellFromPath(path)
 
+        fun fromEnv(getEnv: (String) -> String? = { null }): Shell? {
+            val envShell = getEnv("SHELL")
+            return if (envShell != null) {
+                fromShellPath(envShell)
+            } else {
+                null
+            }
+        }
+
         fun parseShellFromPath(path: String): Shell? {
             val name = path.substringAfterLast('/').substringAfterLast('\\').substringBeforeLast('.')
             return when (name.lowercase()) {
