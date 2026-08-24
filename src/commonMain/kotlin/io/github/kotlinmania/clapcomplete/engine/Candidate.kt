@@ -19,6 +19,8 @@ data class CompletionCandidate(
      */
     fun help(help: StyledStr?): CompletionCandidate = copy(helpValue = help)
 
+    fun help(help: String?): CompletionCandidate = copy(helpValue = help?.let { StyledStr.from(it) })
+
     /**
      * Only first for a given Id is shown.
      *
@@ -33,8 +35,10 @@ data class CompletionCandidate(
      */
     fun tag(tag: StyledStr?): CompletionCandidate = copy(tagValue = tag)
 
+    fun tag(tag: String?): CompletionCandidate = copy(tagValue = tag?.let { StyledStr.from(it) })
+
     /**
-     * Sort weight within a [tag].
+     * Sort weight within a tag.
      */
     fun displayOrder(order: Int?): CompletionCandidate = copy(displayOrderValue = order)
 
@@ -48,7 +52,7 @@ data class CompletionCandidate(
     /**
      * Add a prefix to the value of completion candidate.
      *
-     * This is generally used for post-process by [complete] for things like
+     * This is generally used for post-process by complete for things like
      * pre-pending flags, merging delimiter-separated values, etc.
      */
     fun addPrefix(prefix: String): CompletionCandidate = copy(value = prefix + value)
@@ -74,7 +78,7 @@ data class CompletionCandidate(
     fun getTag(): StyledStr? = tagValue
 
     /**
-     * Get the grouping tag.
+     * Get the display order.
      */
     fun getDisplayOrder(): Int? = displayOrderValue
 
