@@ -1661,7 +1661,7 @@ tapable@^2.3.0, tapable@^2.3.3:
   resolved "https://registry.yarnpkg.com/tapable/-/tapable-2.3.3.tgz#5da7c9992c46038221267985ab28421a8879f160"
   integrity sha512-uxc/zpqFg6x7C8vOE7lh6Lbda8eEL9zmVm/PLeTPBRhh1xCgdWaQ+J1CUieGpIfm2HdtsUpRv+HshiasBMcc6A==
 
-terser-webpack-plugin@5.6.1, terser-webpack-plugin@^5.5.0:
+terser-webpack-plugin@5.6.1:
   version "5.6.1"
   resolved "https://registry.yarnpkg.com/terser-webpack-plugin/-/terser-webpack-plugin-5.6.1.tgz#47bc41bd8b8fab8383b62ec763b7394829097e7b"
   integrity sha512-201R5j+sJpK8nFWwKVyNfZot8FaJbLZDq5evriVzbV1wDtSXDjRUDRfJzHpAaxFDMEhsZL1QkeqM61wgsS3KaQ==
@@ -1759,7 +1759,7 @@ void-elements@^2.0.0:
   resolved "https://registry.yarnpkg.com/void-elements/-/void-elements-2.0.1.tgz#c066afb582bb1cb4128d60ea92392e94d5e9dbec"
   integrity sha512-qZKX4RnBzH2ugr8Lxa7x+0V6XD9Sb/ouARtiasEQCHB1EVU4NXtmHsDDrx1dO4ne5fc3J6EW05BP1Dl0z0iung==
 
-watchpack@^2.5.1:
+watchpack@^2.5.2:
   version "2.5.2"
   resolved "https://registry.yarnpkg.com/watchpack/-/watchpack-2.5.2.tgz#e12e82d84674266fc1c6dbfe38891b92ff0522ec"
   integrity sha512-6i/00NBjP4yGPs+caKSyRfpTF/8Torsu0MOW3mMzIbhgISFder8i7xbqgHlLMwJrdiN8ndBV3UA1/AfzPSr+jg==
@@ -1797,7 +1797,7 @@ webpack-merge@^6.0.1:
     flat "^5.0.2"
     wildcard "^2.0.1"
 
-webpack-sources@3.5.0, webpack-sources@^3.5.0:
+webpack-sources@3.5.0, webpack-sources@^3.5.1:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/webpack-sources/-/webpack-sources-3.5.0.tgz#87bf7f5801a4e985b1f1c92b64b9620a02f76d08"
   integrity sha512-HPuy+uuoTCaaoEoI1LQ3JN9+vrPBvEesnnX1jADHy728cHSMlq4wUc4afYqahq2B1mhQVZxCXOkNTnXltr+2vQ==
