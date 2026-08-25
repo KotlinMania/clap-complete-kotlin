@@ -158,8 +158,9 @@ object FishEnv : EnvCompleter {
         completer: String,
         buf: Appendable,
     ) {
+        val quotedCompleter = if (completer.contains(' ')) "'$completer'" else completer
         buf.append(
-            "complete --keep-order --exclusive --command $bin --arguments \"($varName=fish $completer -- (commandline --current-process --tokenize --cut-at-cursor) (commandline --current-token))\"\n",
+            "complete --keep-order --exclusive --command $bin --arguments \"($varName=fish $quotedCompleter -- (commandline --current-process --tokenize --cut-at-cursor) (commandline --current-token))\"\n",
         )
     }
 
