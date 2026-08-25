@@ -23,26 +23,30 @@ class CompleteEnvTest {
     fun testCompleteEnvTryCompleteDisabled() {
         val completeEnv = CompleteEnv.withFactory { Command.new("testcli") }
         val output = StringBuilder()
-        val completed = completeEnv.tryComplete(
-            args = emptyList(),
-            envLookup = { null },
-            output = output
-        )
+        val completed =
+            completeEnv.tryComplete(
+                args = emptyList(),
+                envLookup = { null },
+                output = output,
+            )
         assertFalse(completed)
         assertEquals("", output.toString())
     }
 
     @Test
     fun testCompleteEnvTryCompleteRegistration() {
-        val completeEnv = CompleteEnv.withFactory { Command.new("testcli") }
-            .`var`("_TESTCLI_COMPLETE")
-            .bin("testcli")
+        val completeEnv =
+            CompleteEnv
+                .withFactory { Command.new("testcli") }
+                .`var`("_TESTCLI_COMPLETE")
+                .bin("testcli")
         val output = StringBuilder()
-        val completed = completeEnv.tryComplete(
-            args = emptyList(),
-            envLookup = { key -> if (key == "_TESTCLI_COMPLETE") "bash" else null },
-            output = output
-        )
+        val completed =
+            completeEnv.tryComplete(
+                args = emptyList(),
+                envLookup = { key -> if (key == "_TESTCLI_COMPLETE") "bash" else null },
+                output = output,
+            )
         assertTrue(completed)
         assertTrue(output.isNotEmpty())
     }
