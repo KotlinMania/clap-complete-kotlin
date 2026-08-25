@@ -26,9 +26,13 @@ class UtilsTest {
                     ),
             ).subcommand(Command.new("hello"))
 
+    private fun built(): Command = commonApp()
+
+    private fun builtWithVersion(): Command = commonApp().version("3.0")
+
     @Test
     fun testSubcommands() {
-        val cmd = commonApp()
+        val cmd = builtWithVersion()
         assertEquals(
             listOf(
                 "test" to "myapp test",
@@ -40,7 +44,7 @@ class UtilsTest {
 
     @Test
     fun testAllSubcommands() {
-        val cmd = commonApp()
+        val cmd = builtWithVersion()
         assertEquals(
             listOf(
                 "test" to "myapp test",
@@ -53,14 +57,22 @@ class UtilsTest {
 
     @Test
     fun testFindSubcommandWithPath() {
-        val cmd = commonApp()
+        val cmd = builtWithVersion()
         val scApp = Utils.findSubcommandWithPath(cmd, listOf("test", "config"))
         assertEquals("config", scApp.getName())
     }
 
     @Test
     fun testFlags() {
-        val cmd = commonApp()
+        val cmd = builtWithVersion()
+        val scFlags = Utils.flags(Utils.findSubcommandWithPath(cmd, listOf("test")))
+        assertEquals(1, scFlags.size)
+        assertEquals("file", scFlags[0].getLong())
+    }
+
+    @Test
+    fun testFlagSubcommand() {
+        val cmd = built()
         val scFlags = Utils.flags(Utils.findSubcommandWithPath(cmd, listOf("test")))
         assertEquals(1, scFlags.size)
         assertEquals("file", scFlags[0].getLong())
@@ -68,14 +80,14 @@ class UtilsTest {
 
     @Test
     fun testShorts() {
-        val cmd = commonApp()
+        val cmd = builtWithVersion()
         val scShorts = Utils.shortsAndVisibleAliases(Utils.findSubcommandWithPath(cmd, listOf("test")))
         assertEquals(listOf('f'), scShorts)
     }
 
     @Test
     fun testLongs() {
-        val cmd = commonApp()
+        val cmd = builtWithVersion()
         val scLongs = Utils.longsAndVisibleAliases(Utils.findSubcommandWithPath(cmd, listOf("test")))
         assertEquals(listOf("file"), scLongs)
     }
