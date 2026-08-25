@@ -5,10 +5,10 @@ Based on AST analysis, here are the concrete next steps.
 ## Summary
 
 - **Files Present:** 17/18 (94.4%)
-- **Function parity:** 112/150 matched (target 166) — 74.7%
+- **Function parity:** 113/150 matched (target 172) — 75.3%
 - **Class/type parity:** 15/27 matched (target 38) — 55.6%
-- **Combined symbol parity:** 127/177 matched (target 204) — 71.8%
-- **Average inline-code cosine:** 0.54 (function body across 12 matched files)
+- **Combined symbol parity:** 128/177 matched (target 210) — 72.3%
+- **Average inline-code cosine:** 0.55 (function body across 12 matched files)
 - **Average documentation cosine:** 0.62 (doc text across 12 matched files)
 - **Cheat-zeroed Files:** 6
 - **Critical Issues:** 11 files with <0.60 function similarity
@@ -109,9 +109,9 @@ Every matched file is listed below with function and type symbol parity.
 ### 8. env.shells
 
 - **Target:** `env.Shells`
-- **Similarity:** 0.51
+- **Similarity:** 0.50
 - **Dependents:** 1
-- **Priority Score:** 1111604.9
+- **Priority Score:** 1111605.0
 - **Functions:** 5/9 matched (target 22)
 - **Missing functions:** `is`, `from_str`, `default`, `fish_env_completer_path_quoting_works`
 - **Types:** 0/7 matched (target 6)
@@ -122,14 +122,14 @@ Every matched file is listed below with function and type symbol parity.
 ### 9. generator.utils
 
 - **Target:** `generator.Utils`
-- **Similarity:** 0.45
+- **Similarity:** 0.56
 - **Dependents:** 1
-- **Priority Score:** 1041705.4
-- **Functions:** 13/17 matched (target 16)
-- **Missing functions:** `common_app`, `built`, `built_with_version`, `test_flag_subcommand`
+- **Priority Score:** 1031704.4
+- **Functions:** 14/17 matched (target 19)
+- **Missing functions:** `common_app`, `built`, `built_with_version`
 - **Types:** 0/0 matched (target 2)
 - **Missing types:** _none_
-- **Tests:** 6/10 matched
+- **Tests:** 7/10 matched
 
 ### 10. engine.custom
 
@@ -148,7 +148,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 51510.0
-- **Functions:** 8/12 matched (target 13)
+- **Functions:** 8/12 matched (target 16)
 - **Missing functions:** `var`, `complete`, `shell`, `write_registration`
 - **Types:** 2/3 matched (target 4)
 - **Missing types:** `EnvCompleter`
