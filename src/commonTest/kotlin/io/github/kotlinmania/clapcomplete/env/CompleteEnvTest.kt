@@ -1,4 +1,4 @@
-// port-lint: tests env/mod.rs
+// port-lint: tests clap_complete/src/env/mod.rs
 package io.github.kotlinmania.clapcomplete.env
 
 import io.github.kotlinmania.clap.Command
