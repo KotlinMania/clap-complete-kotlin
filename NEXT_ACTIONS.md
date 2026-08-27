@@ -8,7 +8,7 @@ Based on AST analysis, here are the concrete next steps.
 - **Function parity:** 135/150 matched (target 193) — 90.0%
 - **Class/type parity:** 15/27 matched (target 38) — 55.6%
 - **Combined symbol parity:** 150/177 matched (target 231) — 84.7%
-- **Average inline-code cosine:** 0.57 (function body across 13 matched files)
+- **Average inline-code cosine:** 0.56 (function body across 13 matched files)
 - **Average documentation cosine:** 0.57 (doc text across 13 matched files)
 - **Cheat-zeroed Files:** 7
 - **Critical Issues:** 11 files with <0.60 function similarity
@@ -125,7 +125,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Target:** `engine.Complete`
 - **Similarity:** 0.70
 - **Dependents:** 1
-- **Priority Score:** 1002102.9
+- **Priority Score:** 1002103.0
 - **Functions:** 20/20 matched (target 24)
 - **Missing functions:** _none_
 - **Types:** 1/1 matched (target 5)
