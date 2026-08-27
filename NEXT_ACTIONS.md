@@ -4,13 +4,13 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 17/18 (94.4%)
-- **Function parity:** 113/150 matched (target 172) — 75.3%
+- **Files Present:** 18/18 (100.0%)
+- **Function parity:** 135/150 matched (target 193) — 90.0%
 - **Class/type parity:** 15/27 matched (target 38) — 55.6%
-- **Combined symbol parity:** 128/177 matched (target 210) — 72.3%
-- **Average inline-code cosine:** 0.55 (function body across 12 matched files)
-- **Average documentation cosine:** 0.62 (doc text across 12 matched files)
-- **Cheat-zeroed Files:** 6
+- **Combined symbol parity:** 150/177 matched (target 231) — 84.7%
+- **Average inline-code cosine:** 0.57 (function body across 13 matched files)
+- **Average documentation cosine:** 0.57 (doc text across 13 matched files)
+- **Cheat-zeroed Files:** 7
 - **Critical Issues:** 11 files with <0.60 function similarity
 
 ## Priority 1: Fix Incomplete High-Dependency Files
@@ -41,14 +41,15 @@ Every matched file is listed below with function and type symbol parity.
 ### 2. shells.zsh
 
 - **Target:** `shells.Zsh`
-- **Similarity:** 0.73
+- **Similarity:** 0.79
 - **Dependents:** 2
-- **Priority Score:** 2012002.8
-- **Functions:** 18/19 matched (target 18)
-- **Missing functions:** `push_conflicts`
+- **Priority Score:** 2002002.1
+- **Functions:** 19/19 matched
+- **Missing functions:** _none_
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 - **Tests:** 2/2 matched
+- **Lint issues:** 3
 
 ### 3. shells.bash
 
@@ -94,19 +95,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 7. engine.complete
-
-- **Target:** `engine.Complete`
-- **Similarity:** 0.10
-- **Dependents:** 1
-- **Priority Score:** 1172109.0
-- **Functions:** 3/20 matched (target 9)
-- **Missing functions:** `complete_option`, `rsplit_delimiter`, `complete_custom_arg_value`, `complete_subcommand`, `complete_external_subcommand`, `longs_and_visible_aliases`, `hidden_longs_aliases`, `shorts_and_visible_aliases`, `populate_arg_candidate`, `possible_values`, `subcommands`, `populate_command_candidate`, `parse_shortflags`, `parse_positional`, `parse_opt_value`, `pos_allows_hyphen`, `opt_allows_hyphen`
-- **Types:** 1/1 matched (target 5)
-- **Missing types:** _none_
-- **Lint issues:** 1
-
-### 8. env.shells
+### 7. env.shells
 
 - **Target:** `env.Shells`
 - **Similarity:** 0.50
@@ -119,7 +108,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Tests:** 0/1 matched
 - **Lint issues:** 3
 
-### 9. generator.utils
+### 8. generator.utils
 
 - **Target:** `generator.Utils`
 - **Similarity:** 0.56
@@ -131,18 +120,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing types:** _none_
 - **Tests:** 7/10 matched
 
-### 10. engine.custom
+### 9. engine.complete
 
-- **Target:** `engine.Custom`
-- **Similarity:** 0.32
-- **Dependents:** 0
-- **Priority Score:** 82106.8
-- **Functions:** 9/15 matched (target 13)
-- **Missing functions:** `fmt`, `default`, `complete_path`, `is_hidden`, `split_file_name`, `path_has_name`
-- **Types:** 4/6 matched (target 4)
-- **Missing types:** `ValueCompleter`, `ValueCandidates`
+- **Target:** `engine.Complete`
+- **Similarity:** 0.70
+- **Dependents:** 1
+- **Priority Score:** 1002102.9
+- **Functions:** 20/20 matched (target 24)
+- **Missing functions:** _none_
+- **Types:** 1/1 matched (target 5)
+- **Missing types:** _none_
 
-### 11. env.mod
+### 10. env.mod
 
 - **Target:** `env.Mod [STUB]`
 - **Similarity:** 0.00
@@ -152,6 +141,17 @@ Every matched file is listed below with function and type symbol parity.
 - **Missing functions:** `var`, `complete`, `shell`, `write_registration`
 - **Types:** 2/3 matched (target 4)
 - **Missing types:** `EnvCompleter`
+
+### 11. engine.custom
+
+- **Target:** `engine.Custom`
+- **Similarity:** 0.46
+- **Dependents:** 0
+- **Priority Score:** 42105.4
+- **Functions:** 13/15 matched (target 17)
+- **Missing functions:** `fmt`, `default`
+- **Types:** 4/6 matched (target 4)
+- **Missing types:** `ValueCompleter`, `ValueCandidates`
 
 ### 12. generator.mod
 
@@ -186,7 +186,18 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 15. aot.mod
+### 15. macros
+
+- **Target:** `clapcomplete.Macros [ZERO]`
+- **Similarity:** 0.00
+- **Dependents:** 0
+- **Priority Score:** 10.0
+- **Functions:** 0/0 matched (target 1)
+- **Missing functions:** _none_
+- **Types:** 0/0 matched
+- **Missing types:** _none_
+
+### 16. aot.mod
 
 - **Target:** `aot.Mod [STUB]`
 - **Similarity:** 0.00
@@ -197,7 +208,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 16. engine.mod
+### 17. engine.mod
 
 - **Target:** `engine.Mod [STUB]`
 - **Similarity:** 0.00
@@ -208,7 +219,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 0/0 matched (target 1)
 - **Missing types:** _none_
 
-### 17. shells.mod
+### 18. shells.mod
 
 - **Target:** `shells.Mod [STUB]`
 - **Similarity:** 0.00

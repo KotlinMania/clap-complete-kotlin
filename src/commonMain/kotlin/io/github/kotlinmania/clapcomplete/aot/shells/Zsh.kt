@@ -292,7 +292,25 @@ object Zsh : Generator {
         return ret.joinToString("\n")
     }
 
-    private fun argConflicts(cmd: Command, arg: Arg, appGlobal: Command?): String = ""
+    private fun pushConflicts(conflicts: List<Arg>, res: MutableList<String>) {
+        for (conflict in conflicts) {
+            conflict.getShort()?.let { s ->
+                res.add("-$s")
+            }
+            conflict.getLong()?.let { l ->
+                res.add("--$l")
+            }
+        }
+    }
+
+    private fun argConflicts(cmd: Command, arg: Arg, appGlobal: Command?): String {
+        val res = mutableListOf<String>()
+        return if (res.isEmpty()) {
+            ""
+        } else {
+            "(${res.joinToString(" ")})"
+        }
+    }
 
     private fun writeFlagsOf(p: Command, pGlobal: Command?): String {
         val ret = mutableListOf<String>()

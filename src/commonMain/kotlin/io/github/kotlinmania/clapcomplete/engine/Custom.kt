@@ -84,7 +84,8 @@ class PathCompleter(
     }
 
     override fun complete(current: String): List<CompletionCandidate> {
-        val candidates = mutableListOf<CompletionCandidate>()
+        val filterFunc = filter ?: { true }
+        val candidates = completePath(current, currentDir, filterFunc).toMutableList()
         if (stdio && current.isEmpty()) {
             candidates.add(CompletionCandidate.new("-").help("stdio"))
         }
@@ -99,3 +100,38 @@ class PathCompleter(
         fun dir(): PathCompleter = PathCompleter()
     }
 }
+
+internal fun completePath(
+    value: String,
+    currentDir: String?,
+    isWanted: (String) -> Boolean,
+): List<CompletionCandidate> {
+    val (prefix, current) = splitFileName(value)
+    val completions = mutableListOf<CompletionCandidate>()
+    if (value.isEmpty() && isWanted(if (prefix.isEmpty()) "." else prefix)) {
+        completions.add(CompletionCandidate.new("."))
+    }
+    return completions
+}
+
+internal fun isHidden(fileName: String): Boolean = fileName.startsWith(".")
+
+internal fun splitFileName(path: String): Pair<String, String> {
+    return if (pathHasName(path)) {
+        val lastSlash = path.lastIndexOfAny(charArrayOf('/', '\\'))
+        if (lastSlash >= 0) {
+            path.substring(0, lastSlash) to path.substring(lastSlash + 1)
+        } else {
+            "" to path
+        }
+    } else {
+        path to ""
+    }
+}
+
+internal fun pathHasName(path: String): Boolean {
+    if (path.isEmpty()) return false
+    val trailing = path.last()
+    return trailing != '/' && trailing != '\\' && !path.endsWith("..")
+}
+
