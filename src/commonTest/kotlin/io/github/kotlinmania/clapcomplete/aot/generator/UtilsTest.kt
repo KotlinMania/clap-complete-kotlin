@@ -1,4 +1,4 @@
-// port-lint: tests clap_complete/src/aot/generator/utils.rs
+// port-lint: tests aot/generator/utils.rs
 package io.github.kotlinmania.clapcomplete.aot.generator
 
 import io.github.kotlinmania.clap.Arg
