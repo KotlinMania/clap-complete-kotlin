@@ -1,4 +1,4 @@
-// port-lint: source clap_complete/src/aot/generator/utils.rs
+// port-lint: source aot/generator/utils.rs
 package io.github.kotlinmania.clapcomplete.aot.generator
 
 import io.github.kotlinmania.clap.Arg

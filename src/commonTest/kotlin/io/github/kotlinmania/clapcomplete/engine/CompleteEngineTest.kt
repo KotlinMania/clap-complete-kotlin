@@ -1,4 +1,4 @@
-// port-lint: tests clap_complete/src/engine/complete.rs
+// port-lint: tests engine/complete.rs
 package io.github.kotlinmania.clapcomplete.engine
 
 import io.github.kotlinmania.clap.Arg
