@@ -116,8 +116,8 @@ internal fun completePath(
 
 internal fun isHidden(fileName: String): Boolean = fileName.startsWith(".")
 
-internal fun splitFileName(path: String): Pair<String, String> {
-    return if (pathHasName(path)) {
+internal fun splitFileName(path: String): Pair<String, String> =
+    if (pathHasName(path)) {
         val lastSlash = path.lastIndexOfAny(charArrayOf('/', '\\'))
         if (lastSlash >= 0) {
             path.substring(0, lastSlash) to path.substring(lastSlash + 1)
@@ -127,11 +127,9 @@ internal fun splitFileName(path: String): Pair<String, String> {
     } else {
         path to ""
     }
-}
 
 internal fun pathHasName(path: String): Boolean {
     if (path.isEmpty()) return false
     val trailing = path.last()
     return trailing != '/' && trailing != '\\' && !path.endsWith("..")
 }
-

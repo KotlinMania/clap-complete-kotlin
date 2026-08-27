@@ -78,14 +78,16 @@ class CompleteEnvTest {
     @Test
     fun verifyCli() {
         val command =
-            Command.new("dynamic")
+            Command
+                .new("dynamic")
                 .arg(
-                    io.github.kotlinmania.clap.Arg.new("input")
+                    io.github.kotlinmania.clap.Arg
+                        .new("input")
                         .long("input")
                         .short('i'),
-                )
-                .arg(
-                    io.github.kotlinmania.clap.Arg.new("format")
+                ).arg(
+                    io.github.kotlinmania.clap.Arg
+                        .new("format")
                         .long("format")
                         .short('F'),
                 )
