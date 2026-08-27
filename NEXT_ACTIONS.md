@@ -4,12 +4,12 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 17/18 (94.4%)
-- **Function parity:** 113/150 matched (target 172) — 75.3%
-- **Class/type parity:** 15/27 matched (target 38) — 55.6%
-- **Combined symbol parity:** 128/177 matched (target 210) — 72.3%
-- **Average inline-code cosine:** 0.55 (function body across 12 matched files)
-- **Average documentation cosine:** 0.62 (doc text across 12 matched files)
+- **Files Present:** 17/22 (77.3%)
+- **Function parity:** 113/161 matched (target 172) — 70.2%
+- **Class/type parity:** 15/30 matched (target 38) — 50.0%
+- **Combined symbol parity:** 128/191 matched (target 210) — 67.0%
+- **Average inline-code cosine:** 0.59 (function body across 11 matched files)
+- **Average documentation cosine:** 0.65 (doc text across 11 matched files)
 - **Cheat-zeroed Files:** 6
 - **Critical Issues:** 11 files with <0.60 function similarity
 
@@ -164,9 +164,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 13. lib
+### 13. clap_complete.lib
 
-- **Target:** `clapcomplete.Lib [ZERO]`
+- **Target:** `clapcomplete.Lib [STUB]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10110.0

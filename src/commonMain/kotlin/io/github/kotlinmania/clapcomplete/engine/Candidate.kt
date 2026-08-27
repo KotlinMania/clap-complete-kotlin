@@ -1,4 +1,4 @@
-// port-lint: source engine/candidate.rs
+// port-lint: source clap_complete/src/engine/candidate.rs
 package io.github.kotlinmania.clapcomplete.engine
 
 import io.github.kotlinmania.clap.builder.StyledStr
