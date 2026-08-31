@@ -1,4 +1,4 @@
-// port-lint: source engine/complete.rs
+// port-lint: source clap_complete/src/engine/complete.rs
 package io.github.kotlinmania.clapcomplete.engine
 
 import io.github.kotlinmania.clap.Arg

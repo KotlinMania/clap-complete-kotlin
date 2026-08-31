@@ -1,4 +1,4 @@
-// port-lint: source aot/shells/elvish.rs
+// port-lint: source clap_complete/src/aot/shells/elvish.rs
 package io.github.kotlinmania.clapcomplete.aot.shells
 
 import io.github.kotlinmania.clap.Command
