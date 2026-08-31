@@ -1,4 +1,4 @@
-// port-lint: source clap_complete/src/aot/shells/zsh.rs
+// port-lint: source aot/shells/zsh.rs
 package io.github.kotlinmania.clapcomplete.aot.shells
 
 import io.github.kotlinmania.clap.Arg

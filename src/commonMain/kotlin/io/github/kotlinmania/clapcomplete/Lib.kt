@@ -1,4 +1,4 @@
-// port-lint: source clap_complete/src/lib.rs
+// port-lint: source lib.rs
 package io.github.kotlinmania.clapcomplete
 
 import io.github.kotlinmania.clap.Command

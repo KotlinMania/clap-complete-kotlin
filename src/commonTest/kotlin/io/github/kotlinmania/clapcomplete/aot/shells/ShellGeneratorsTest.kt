@@ -1,4 +1,4 @@
-// port-lint: tests clap_complete/src/aot/shells/bash.rs
+// port-lint: tests aot/shells/bash.rs
 package io.github.kotlinmania.clapcomplete.aot.shells
 
 import io.github.kotlinmania.clap.Arg
