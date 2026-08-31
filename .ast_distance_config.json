@@ -2,7 +2,7 @@
   "type": "port",
   "name": "clap-complete-kotlin",
   "source": {
-    "path": "tmp/clap_complete/src",
+    "path": "tmp",
     "lang": "rust"
   },
   "target": {
