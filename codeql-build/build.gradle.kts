@@ -172,11 +172,89 @@ fun registerCodeqlCompileTask(
             val commonSourceFiles = commonSources.files.toMutableList()
             val sourceFiles = sources.files.toMutableList()
 
-            val stubClap = dummySourceDir.get().file("io/github/kotlinmania/clap/builder/ClapStub.kt").asFile
+            val stubClapBuilder = dummySourceDir.get().file("io/github/kotlinmania/clap/builder/ClapBuilderStub.kt").asFile
+            stubClapBuilder.parentFile.mkdirs()
+            stubClapBuilder.writeText(
+                "package io.github.kotlinmania.clap.builder\n\n" +
+                    "public class StyledStr {\n" +
+                    "    public companion object {\n" +
+                    "        public fun from(s: String): StyledStr = StyledStr()\n" +
+                    "    }\n" +
+                    "}\n\n" +
+                    "public class PossibleValue(\n" +
+                    "    private val _value: String = \"\",\n" +
+                    "    private val _help: String? = null,\n" +
+                    "    private val _hide: Boolean = false,\n" +
+                    ") {\n" +
+                    "    public fun getName(): String = _value\n" +
+                    "    public fun getValue(): String = _value\n" +
+                    "    public fun getHelp(): String? = _help\n" +
+                    "    public fun isHide(): Boolean = _hide\n" +
+                    "    public fun isHideSet(): Boolean = _hide\n" +
+                    "    public companion object {\n" +
+                    "        public fun new(value: String): PossibleValue = PossibleValue(value)\n" +
+                    "    }\n" +
+                    "}\n",
+            )
+            commonSourceFiles.add(stubClapBuilder)
+            sourceFiles.add(stubClapBuilder)
+
+            val stubClap = dummySourceDir.get().file("io/github/kotlinmania/clap/ClapStub.kt").asFile
             stubClap.parentFile.mkdirs()
             stubClap.writeText(
-                "package io.github.kotlinmania.clap.builder\n\n" +
-                    "public class StyledStr\n",
+                "package io.github.kotlinmania.clap\n\n" +
+                    "public enum class ValueHint {\n" +
+                    "    Unknown, Other, AnyPath, FilePath, DirPath, ExecutablePath,\n" +
+                    "    CommandName, CommandString, CommandWithArguments, Username, Hostname, Url, EmailAddress;\n" +
+                    "}\n\n" +
+                    "public enum class ArgAction {\n" +
+                    "    Set, SetTrue, SetFalse, Append, Count, Help, Version;\n" +
+                    "    public fun takesValues(): Boolean = this == Set || this == Append\n" +
+                    "}\n\n" +
+                    "public class Arg(private val _id: String = \"\") {\n" +
+                    "    public fun getId(): String = _id\n" +
+                    "    public fun getLong(): String? = null\n" +
+                    "    public fun getShort(): Char? = null\n" +
+                    "    public fun getHelp(): String? = null\n" +
+                    "    public fun getLongHelp(): String? = null\n" +
+                    "    public fun getShortAliases(): List<Char> = emptyList()\n" +
+                    "    public fun getAliases(): List<String> = emptyList()\n" +
+                    "    public fun getVisibleShortAliases(): List<Char> = emptyList()\n" +
+                    "    public fun getVisibleAliases(): List<String> = emptyList()\n" +
+                    "    public fun isHide(): Boolean = false\n" +
+                    "    public fun isHideSet(): Boolean = false\n" +
+                    "    public fun isPositional(): Boolean = false\n" +
+                    "    public fun isRequired(): Boolean = false\n" +
+                    "    public fun getPossibleValues(): List<io.github.kotlinmania.clap.builder.PossibleValue> = emptyList()\n" +
+                    "    public fun getValueHint(): ValueHint = ValueHint.Unknown\n" +
+                    "    public fun getAction(): ArgAction = ArgAction.Set\n" +
+                    "    public fun getNumArgs(): IntRange? = null\n" +
+                    "    public fun getValueNames(): List<String> = emptyList()\n" +
+                    "    public fun getValueName(): String? = null\n" +
+                    "}\n\n" +
+                    "public class Command(private val _name: String = \"\") {\n" +
+                    "    public fun getName(): String = _name\n" +
+                    "    public fun getBinName(): String? = null\n" +
+                    "    public fun getAbout(): String? = null\n" +
+                    "    public fun getLongAbout(): String? = null\n" +
+                    "    public fun getVersion(): String? = null\n" +
+                    "    public fun getAuthor(): String? = null\n" +
+                    "    public fun getBeforeHelp(): String? = null\n" +
+                    "    public fun getAfterHelp(): String? = null\n" +
+                    "    public fun getVisibleAliases(): List<String> = emptyList()\n" +
+                    "    public fun getAliases(): List<String> = emptyList()\n" +
+                    "    public fun getShortFlagAliases(): List<Char> = emptyList()\n" +
+                    "    public fun getLongFlagAliases(): List<String> = emptyList()\n" +
+                    "    public fun getSubcommands(): List<Command> = emptyList()\n" +
+                    "    public fun getArguments(): List<Arg> = emptyList()\n" +
+                    "    public fun getPositionals(): List<Arg> = emptyList()\n" +
+                    "    public fun isHide(): Boolean = false\n" +
+                    "    public fun isSubcommandRequired(): Boolean = false\n" +
+                    "    public fun isExternalSubcommand(): Boolean = false\n" +
+                    "    public fun isAllowExternalSubcommandsSet(): Boolean = false\n" +
+                    "    public fun findSubcommand(name: String): Command? = null\n" +
+                    "    public fun build() {}\n" +
+                    "}\n",
             )
             commonSourceFiles.add(stubClap)
             sourceFiles.add(stubClap)
