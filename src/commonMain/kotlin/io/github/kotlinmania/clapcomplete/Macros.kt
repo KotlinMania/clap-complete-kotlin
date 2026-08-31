@@ -1,4 +1,4 @@
-// port-lint: source macros.rs
+// port-lint: source clap_complete/src/macros.rs
 package io.github.kotlinmania.clapcomplete
 
 internal fun debug(message: () -> String) {

@@ -1,4 +1,4 @@
-// port-lint: source aot/shells/powershell.rs
+// port-lint: source clap_complete/src/aot/shells/powershell.rs
 package io.github.kotlinmania.clapcomplete.aot.shells
 
 import io.github.kotlinmania.clap.Arg
