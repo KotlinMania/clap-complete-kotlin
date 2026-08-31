@@ -1,4 +1,4 @@
-// port-lint: source env/shells.rs
+// port-lint: source clap_complete/src/env/shells.rs
 package io.github.kotlinmania.clapcomplete.env
 
 import io.github.kotlinmania.clap.Command
