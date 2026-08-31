@@ -1,4 +1,4 @@
-// port-lint: tests clap_complete/src/aot/shells/zsh.rs
+// port-lint: tests aot/shells/zsh.rs
 package io.github.kotlinmania.clapcomplete.aot.shells
 
 import kotlin.test.Test
