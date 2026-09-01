@@ -1,4 +1,4 @@
-// port-lint: source clap_complete/src/env/mod.rs
+// port-lint: source env/mod.rs
 package io.github.kotlinmania.clapcomplete.env
 
 /**
