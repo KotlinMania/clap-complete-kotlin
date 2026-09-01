@@ -4,12 +4,12 @@ Based on AST analysis, here are the concrete next steps.
 
 ## Summary
 
-- **Files Present:** 18/22 (81.8%)
-- **Function parity:** 135/161 matched (target 193) — 83.9%
-- **Class/type parity:** 15/30 matched (target 38) — 50.0%
-- **Combined symbol parity:** 150/191 matched (target 231) — 78.5%
-- **Average inline-code cosine:** 0.61 (function body across 12 matched files)
-- **Average documentation cosine:** 0.59 (doc text across 12 matched files)
+- **Files Present:** 18/18 (100.0%)
+- **Function parity:** 135/150 matched (target 193) — 90.0%
+- **Class/type parity:** 15/27 matched (target 38) — 55.6%
+- **Combined symbol parity:** 150/177 matched (target 231) — 84.7%
+- **Average inline-code cosine:** 0.56 (function body across 13 matched files)
+- **Average documentation cosine:** 0.57 (doc text across 13 matched files)
 - **Cheat-zeroed Files:** 7
 - **Critical Issues:** 11 files with <0.60 function similarity
 
@@ -164,9 +164,9 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched (target 2)
 - **Missing types:** _none_
 
-### 13. clap_complete.lib
+### 13. lib
 
-- **Target:** `clapcomplete.Lib [STUB]`
+- **Target:** `clapcomplete.Lib [ZERO]`
 - **Similarity:** 0.00
 - **Dependents:** 0
 - **Priority Score:** 10110.0
@@ -186,7 +186,7 @@ Every matched file is listed below with function and type symbol parity.
 - **Types:** 1/1 matched
 - **Missing types:** _none_
 
-### 15. clap_complete.macros
+### 15. macros
 
 - **Target:** `clapcomplete.Macros [ZERO]`
 - **Similarity:** 0.00
