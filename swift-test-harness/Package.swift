@@ -3,7 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "SwiftTestHarness",
-    platforms: [.macOS(.v14)],
+    platforms: [.macOS("15.0")],
     dependencies: [
         .package(name: "ClapComplete", path: "../build/SPMPackage/macosArm64/Debug")
     ],
