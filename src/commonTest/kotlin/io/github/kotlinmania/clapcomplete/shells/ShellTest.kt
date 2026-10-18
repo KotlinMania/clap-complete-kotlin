@@ -1,6 +1,7 @@
 // port-lint: tests aot/shells/shell.rs
 package io.github.kotlinmania.clapcomplete.shells
 
+import io.github.kotlinmania.clapcomplete.aot.shells.Shell
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNull
