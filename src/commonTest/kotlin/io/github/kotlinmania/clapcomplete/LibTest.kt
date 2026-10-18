@@ -2,7 +2,7 @@
 package io.github.kotlinmania.clapcomplete
 
 import io.github.kotlinmania.clap.Command
-import io.github.kotlinmania.clapcomplete.shells.Shell
+import io.github.kotlinmania.clapcomplete.aot.shells.Shell
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
