@@ -1,34 +1,16 @@
 // port-lint: tests aot/generator/utils.rs
 package io.github.kotlinmania.clapcomplete.aot.generator
 
-import io.github.kotlinmania.clap.Arg
-import io.github.kotlinmania.clap.ArgAction
 import io.github.kotlinmania.clap.Command
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class UtilsTest {
-    private fun commonApp(): Command =
-        Command
-            .new("myapp")
-            .subcommand(
-                Command
-                    .new("test")
-                    .subcommand(Command.new("config"))
-                    .arg(
-                        Arg
-                            .new("file")
-                            .short('f')
-                            .visibleShortAlias('p')
-                            .long("file")
-                            .action(ArgAction.SetTrue)
-                            .visibleAlias("path"),
-                    ),
-            ).subcommand(Command.new("hello"))
+    internal fun commonApp(): Command = Utils.commonApp()
 
-    private fun built(): Command = commonApp()
+    internal fun built(): Command = Utils.built()
 
-    private fun builtWithVersion(): Command = commonApp().version("3.0")
+    internal fun builtWithVersion(): Command = Utils.builtWithVersion()
 
     @Test
     fun testSubcommands() {

@@ -72,7 +72,11 @@ enum class Shell(
         }
     }
 
-    override fun toString(): String = value
+    fun fmt(): String = value
+
+    override fun toString(): String = fmt()
+
+    typealias Err = String
 
     companion object {
         fun valueVariants(): List<Shell> = entries

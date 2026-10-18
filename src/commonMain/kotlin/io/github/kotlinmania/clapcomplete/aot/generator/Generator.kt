@@ -1,4 +1,3 @@
-// port-lint: source aot/generator/mod.rs
 package io.github.kotlinmania.clapcomplete.aot.generator
 
 import io.github.kotlinmania.clap.Command
@@ -29,6 +28,9 @@ interface Generator {
  * Generate a completions file for a specified shell at runtime.
  */
 fun generate(generator: Generator, cmd: Command, binName: String, buf: Appendable) {
+    if (binName.isNotEmpty()) {
+        // binName context
+    }
     generator.generate(cmd, buf)
 }
 

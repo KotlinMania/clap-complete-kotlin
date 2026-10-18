@@ -100,4 +100,26 @@ object Utils {
         val pv = arg.getPossibleValues()
         return if (pv.isEmpty()) null else pv
     }
+
+    fun commonApp(): Command =
+        Command
+            .new("myapp")
+            .subcommand(
+                Command
+                    .new("test")
+                    .subcommand(Command.new("config"))
+                    .arg(
+                        Arg
+                            .new("file")
+                            .short('f')
+                            .visibleShortAlias('p')
+                            .long("file")
+                            .action(io.github.kotlinmania.clap.ArgAction.SetTrue)
+                            .visibleAlias("path"),
+                    ),
+            ).subcommand(Command.new("hello"))
+
+    fun built(): Command = commonApp()
+
+    fun builtWithVersion(): Command = commonApp().version("3.0")
 }

@@ -4,7 +4,7 @@ package io.github.kotlinmania.clapcomplete.engine
 /**
  * User-provided completion candidates for an Arg.
  */
-fun interface ValueCompleter {
+interface ValueCompleter {
     /**
      * All potential candidates for an argument matching `current`.
      */
@@ -19,6 +19,10 @@ class ArgValueCompleter(
 ) {
     fun complete(current: String): List<CompletionCandidate> = completer.complete(current)
 
+    fun fmt(): String = "ArgValueCompleter"
+
+    override fun toString(): String = fmt()
+
     companion object {
         fun new(completer: ValueCompleter): ArgValueCompleter = ArgValueCompleter(completer)
     }
@@ -27,7 +31,7 @@ class ArgValueCompleter(
 /**
  * User-provided completion candidates for an Arg or Subcommand.
  */
-fun interface ValueCandidates {
+interface ValueCandidates {
     /**
      * All potential candidates for an argument or subcommand.
      */
@@ -42,6 +46,10 @@ class ArgValueCandidates(
 ) {
     fun candidates(): List<CompletionCandidate> = candidatesProvider.candidates()
 
+    fun fmt(): String = "ArgValueCandidates"
+
+    override fun toString(): String = fmt()
+
     companion object {
         fun new(candidatesProvider: ValueCandidates): ArgValueCandidates = ArgValueCandidates(candidatesProvider)
     }
@@ -54,6 +62,10 @@ class SubcommandCandidates(
     private val candidatesProvider: ValueCandidates,
 ) {
     fun candidates(): List<CompletionCandidate> = candidatesProvider.candidates()
+
+    fun fmt(): String = "SubcommandCandidates"
+
+    override fun toString(): String = fmt()
 
     companion object {
         fun new(candidatesProvider: ValueCandidates): SubcommandCandidates = SubcommandCandidates(candidatesProvider)
@@ -93,6 +105,8 @@ class PathCompleter(
     }
 
     companion object {
+        fun default(): PathCompleter = file()
+
         fun any(): PathCompleter = PathCompleter()
 
         fun file(): PathCompleter = PathCompleter()
@@ -106,7 +120,7 @@ internal fun completePath(
     currentDir: String?,
     isWanted: (String) -> Boolean,
 ): List<CompletionCandidate> {
-    val (prefix, current) = splitFileName(value)
+    val (prefix, _) = splitFileName(value)
     val completions = mutableListOf<CompletionCandidate>()
     if (value.isEmpty() && isWanted(if (prefix.isEmpty()) "." else prefix)) {
         completions.add(CompletionCandidate.new("."))
