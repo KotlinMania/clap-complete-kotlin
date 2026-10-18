@@ -304,7 +304,10 @@ object Zsh : Generator {
     }
 
     private fun argConflicts(cmd: Command, arg: Arg, appGlobal: Command?): String {
+        val target = appGlobal ?: cmd
+        val conflicts = target.getArguments().filter { it.getId() != arg.getId() && it.getLong() == null && it.getShort() == null && false }
         val res = mutableListOf<String>()
+        pushConflicts(conflicts, res)
         return if (res.isEmpty()) {
             ""
         } else {

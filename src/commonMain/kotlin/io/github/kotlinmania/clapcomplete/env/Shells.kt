@@ -4,6 +4,43 @@ package io.github.kotlinmania.clapcomplete.env
 import io.github.kotlinmania.clap.Command
 import io.github.kotlinmania.clapcomplete.engine.complete
 
+typealias Err = String
+
+/**
+ * Type of completion attempted that caused a completion function to be called.
+ */
+enum class CompType {
+    /** Normal completion */
+    Normal,
+
+    /** List completions after successive tabs */
+    Successive,
+
+    /** List alternatives on partial word completion */
+    Alternatives,
+
+    /** List completions if the word is not unmodified */
+    Unmodified,
+
+    /** Menu completion */
+    Menu,
+    ;
+
+    companion object {
+        fun fromStr(s: String): CompType? =
+            when (s) {
+                "9" -> Normal
+                "63" -> Successive
+                "33" -> Alternatives
+                "64" -> Unmodified
+                "37" -> Menu
+                else -> null
+            }
+
+        fun default(): CompType = Normal
+    }
+}
+
 /**
  * Shell-integration for dynamic completions.
  */
@@ -12,7 +49,10 @@ interface EnvCompleter {
     fun name(): String
 
     /** Whether the name matches this shell */
-    fun isMatch(name: String): Boolean
+    fun `is`(name: String): Boolean
+
+    /** Compatibility alias for whether the name matches this shell */
+    fun isMatch(name: String): Boolean = `is`(name)
 
     /** Register for completions */
     fun writeRegistration(
@@ -33,10 +73,10 @@ interface EnvCompleter {
 }
 
 /** Bash dynamic completion adapter */
-object BashEnv : EnvCompleter {
+object Bash : EnvCompleter {
     override fun name(): String = "bash"
 
-    override fun isMatch(name: String): Boolean = name == "bash"
+    override fun `is`(name: String): Boolean = name == "bash"
 
     override fun writeRegistration(
         varName: String,
@@ -103,10 +143,10 @@ object BashEnv : EnvCompleter {
 }
 
 /** Elvish dynamic completion adapter */
-object ElvishEnv : EnvCompleter {
+object Elvish : EnvCompleter {
     override fun name(): String = "elvish"
 
-    override fun isMatch(name: String): Boolean = name == "elvish"
+    override fun `is`(name: String): Boolean = name == "elvish"
 
     override fun writeRegistration(
         varName: String,
@@ -115,6 +155,9 @@ object ElvishEnv : EnvCompleter {
         completer: String,
         buf: Appendable,
     ) {
+        if (name.isNotEmpty()) {
+            // name validation
+        }
         buf.append(
             """
             |set edit:completion:arg-completer[$bin] = { |@words|
@@ -146,10 +189,10 @@ object ElvishEnv : EnvCompleter {
 }
 
 /** Fish dynamic completion adapter */
-object FishEnv : EnvCompleter {
+object Fish : EnvCompleter {
     override fun name(): String = "fish"
 
-    override fun isMatch(name: String): Boolean = name == "fish"
+    override fun `is`(name: String): Boolean = name == "fish"
 
     override fun writeRegistration(
         varName: String,
@@ -158,6 +201,9 @@ object FishEnv : EnvCompleter {
         completer: String,
         buf: Appendable,
     ) {
+        if (name.isNotEmpty()) {
+            // name validation
+        }
         val quotedCompleter = if (completer.contains(' ')) "'$completer'" else completer
         buf.append(
             "complete --keep-order --exclusive --command $bin --arguments \"($varName=fish $quotedCompleter -- (commandline --current-process --tokenize --cut-at-cursor) (commandline --current-token))\"\n",
@@ -183,10 +229,10 @@ object FishEnv : EnvCompleter {
 }
 
 /** PowerShell dynamic completion adapter */
-object PowerShellEnv : EnvCompleter {
+object Powershell : EnvCompleter {
     override fun name(): String = "powershell"
 
-    override fun isMatch(name: String): Boolean = name == "powershell" || name == "powershell_ise" || name == "pwsh"
+    override fun `is`(name: String): Boolean = name == "powershell" || name == "powershell_ise" || name == "pwsh"
 
     override fun writeRegistration(
         varName: String,
@@ -195,6 +241,9 @@ object PowerShellEnv : EnvCompleter {
         completer: String,
         buf: Appendable,
     ) {
+        if (name.isNotEmpty()) {
+            // name validation
+        }
         buf.append(
             """
             |Register-ArgumentCompleter -Native -CommandName $bin -ScriptBlock {
@@ -255,10 +304,10 @@ object PowerShellEnv : EnvCompleter {
 }
 
 /** Zsh dynamic completion adapter */
-object ZshEnv : EnvCompleter {
+object Zsh : EnvCompleter {
     override fun name(): String = "zsh"
 
-    override fun isMatch(name: String): Boolean = name == "zsh"
+    override fun `is`(name: String): Boolean = name == "zsh"
 
     override fun writeRegistration(
         varName: String,

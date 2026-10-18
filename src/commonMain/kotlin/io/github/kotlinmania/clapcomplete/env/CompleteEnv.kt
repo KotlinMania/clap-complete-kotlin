@@ -1,4 +1,3 @@
-// port-lint: source env/mod.rs
 package io.github.kotlinmania.clapcomplete.env
 
 import io.github.kotlinmania.clap.Command
@@ -17,7 +16,7 @@ class Shells(
 
     companion object {
         fun builtins(): Shells =
-            Shells(listOf(BashEnv, ElvishEnv, FishEnv, PowerShellEnv, ZshEnv))
+            Shells(listOf(Bash, Elvish, Fish, Powershell, Zsh))
     }
 }
 
