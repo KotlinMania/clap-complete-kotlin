@@ -221,7 +221,13 @@ object Fish : EnvCompleter {
         for (candidate in completions) {
             buf.append(candidate.getValue())
             candidate.getHelp()?.let { help ->
-                buf.append("\t").append(help.toString().lines().firstOrNull() ?: "")
+                buf.append("\t").append(
+                    help
+                        .toString()
+                        .lines()
+                        .firstOrNull()
+                        .orEmpty(),
+                )
             }
             buf.append("\n")
         }
@@ -296,7 +302,13 @@ object Powershell : EnvCompleter {
         for (candidate in completions) {
             buf.append(candidate.getValue())
             candidate.getHelp()?.let { help ->
-                buf.append("\t").append(help.toString().lines().firstOrNull() ?: "")
+                buf.append("\t").append(
+                    help
+                        .toString()
+                        .lines()
+                        .firstOrNull()
+                        .orEmpty(),
+                )
             }
             buf.append("\n")
         }
@@ -374,7 +386,15 @@ object Zsh : EnvCompleter {
             }
             buf.append(escapeValue(candidate.getValue()))
             candidate.getHelp()?.let { help ->
-                buf.append(":").append(escapeHelp(help.toString().lines().firstOrNull() ?: ""))
+                buf.append(":").append(
+                    escapeHelp(
+                        help
+                            .toString()
+                            .lines()
+                            .firstOrNull()
+                            .orEmpty(),
+                    ),
+                )
             }
         }
     }

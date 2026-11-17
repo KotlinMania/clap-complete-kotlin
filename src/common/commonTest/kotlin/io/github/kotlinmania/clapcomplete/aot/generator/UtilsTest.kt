@@ -1,16 +1,35 @@
 // port-lint: tests aot/generator/utils.rs
 package io.github.kotlinmania.clapcomplete.aot.generator
 
+import io.github.kotlinmania.clap.Arg
+import io.github.kotlinmania.clap.ArgAction
 import io.github.kotlinmania.clap.Command
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
 class UtilsTest {
-    internal fun commonApp(): Command = Utils.commonApp()
+    internal fun commonApp(): Command =
+        Command
+            .new("myapp")
+            .subcommand(
+                Command
+                    .new("test")
+                    .visibleAlias("check")
+                    .subcommand(Command.new("config"))
+                    .arg(
+                        Arg
+                            .new("file")
+                            .short('f')
+                            .visibleShortAlias('p')
+                            .long("file")
+                            .action(ArgAction.SetTrue)
+                            .visibleAlias("path"),
+                    ),
+            ).subcommand(Command.new("hello"))
 
-    internal fun built(): Command = Utils.built()
+    internal fun built(): Command = commonApp()
 
-    internal fun builtWithVersion(): Command = Utils.builtWithVersion()
+    internal fun builtWithVersion(): Command = commonApp().version("3.0")
 
     @Test
     fun testSubcommands() {
@@ -18,6 +37,7 @@ class UtilsTest {
         assertEquals(
             listOf(
                 "test" to "myapp test",
+                "check" to "myapp test",
                 "hello" to "myapp hello",
             ),
             Utils.subcommands(cmd),
@@ -30,8 +50,9 @@ class UtilsTest {
         assertEquals(
             listOf(
                 "test" to "myapp test",
-                "config" to "myapp test config",
+                "check" to "myapp test",
                 "hello" to "myapp hello",
+                "config" to "myapp test config",
             ),
             Utils.allSubcommands(cmd),
         )

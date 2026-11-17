@@ -43,7 +43,11 @@ fun complete(
         val currentState = nextState
         nextState = ParseState.ValueDone
 
-        if (arg == "--") {
+        if (isEscaped) {
+            val (ns, pi) = parsePositional(currentCmd, posIndex, isEscaped, currentState)
+            nextState = ns
+            posIndex = pi
+        } else if (arg == "--") {
             isEscaped = true
         } else if (optAllowsHyphen(currentState, arg)) {
             if (currentState is ParseState.Opt) {
@@ -144,7 +148,7 @@ private fun completeArg(
     }
 
     return deduped.sortedWith(
-        compareBy<CompletionCandidate> { it.getTag()?.toString() ?: "" }
+        compareBy<CompletionCandidate> { it.getTag()?.toString().orEmpty() }
             .thenBy { it.getDisplayOrder() ?: 0 }
             .thenBy { it.getValue() },
     )
@@ -209,7 +213,7 @@ internal fun completeArgValue(
     arg: Arg,
     currentDir: String?,
 ): List<CompletionCandidate> {
-    var values = mutableListOf<CompletionCandidate>()
+    val baseValues = mutableListOf<CompletionCandidate>()
     val (prefix, actualValue) = rsplitDelimiter(value, null) ?: (null to value)
 
     val pvList = possibleValues(arg)
@@ -217,7 +221,7 @@ internal fun completeArgValue(
         for (p in pvList) {
             val name = p.getName()
             if (name.startsWith(actualValue)) {
-                values.add(
+                baseValues.add(
                     CompletionCandidate
                         .new(name)
                         .help(p.getHelp()?.toString())
@@ -229,28 +233,27 @@ internal fun completeArgValue(
         when (arg.getValueHint()) {
             ValueHint.Unknown, ValueHint.Other -> {}
             ValueHint.AnyPath, ValueHint.FilePath, ValueHint.DirPath, ValueHint.ExecutablePath -> {
-                values.addAll(completePath(actualValue, currentDir) { true })
+                baseValues.addAll(completePath(actualValue, currentDir) { true })
             }
             else -> {}
         }
-        values.sort()
+        baseValues.sort()
     }
 
-    if (prefix != null) {
-        values = values.map { it.addPrefix(prefix) }.toMutableList()
+    val prefixedValues =
+        if (prefix != null) {
+            baseValues.map { it.addPrefix(prefix) }
+        } else {
+            baseValues
+        }
+
+    return prefixedValues.map { comp ->
+        if (comp.getTag() != null) {
+            comp
+        } else {
+            comp.tag(arg.getLong() ?: arg.getShort()?.toString().orEmpty())
+        }
     }
-
-    values =
-        values
-            .map { comp ->
-                if (comp.getTag() != null) {
-                    comp
-                } else {
-                    comp.tag(arg.getLong() ?: arg.getShort()?.toString() ?: "")
-                }
-            }.toMutableList()
-
-    return values
 }
 
 internal fun rsplitDelimiter(
@@ -301,13 +304,9 @@ internal fun longsAndVisibleAliases(p: Command): List<CompletionCandidate> {
     return result
 }
 
-internal fun hiddenLongsAliases(p: Command): List<CompletionCandidate> {
-    val result = mutableListOf<CompletionCandidate>()
-    for (a in p.getArguments()) {
-        // hidden aliases
-    }
-    return result
-}
+internal fun hiddenLongsAliases(
+    @Suppress("UNUSED_PARAMETER") p: Command,
+): List<CompletionCandidate> = emptyList()
 
 internal fun shortsAndVisibleAliases(p: Command): List<CompletionCandidate> {
     val result = mutableListOf<CompletionCandidate>()

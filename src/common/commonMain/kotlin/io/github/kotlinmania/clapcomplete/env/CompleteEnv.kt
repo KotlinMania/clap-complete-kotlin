@@ -62,15 +62,33 @@ class CompleteEnv(
             return false
         }
 
-        val shell = shellRegistry.completer(shellEnv) ?: return false
+        val shellName =
+            shellEnv
+                .substringAfterLast('/')
+                .substringAfterLast('\\')
+                .substringBeforeLast('.')
+        val shell = shellRegistry.completer(shellName) ?: return false
         val cmd = factory()
 
-        if (args.isEmpty()) {
+        val completionArgs =
+            if (args.isEmpty()) {
+                emptyList()
+            } else {
+                val tail = args.drop(1)
+                val escapeIdx = tail.indexOf("--")
+                if (escapeIdx >= 0) {
+                    tail.drop(escapeIdx + 1)
+                } else {
+                    emptyList()
+                }
+            }
+
+        if (completionArgs.isEmpty()) {
             val bin = binName ?: cmd.getName()
             val completer = completerName ?: bin
             shell.writeRegistration(varName, cmd.getName(), bin, completer, output)
         } else {
-            shell.writeComplete(cmd, args, currentDir, output)
+            shell.writeComplete(cmd, completionArgs, currentDir, output)
         }
 
         return true

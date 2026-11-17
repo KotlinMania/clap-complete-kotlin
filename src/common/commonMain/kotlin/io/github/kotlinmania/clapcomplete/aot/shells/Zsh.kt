@@ -125,7 +125,7 @@ object Zsh : Generator {
         val segments = mutableListOf<String>()
 
         fun addSubcommands(subcommand: Command, name: String) {
-            val help = escapeHelp(subcommand.getAbout() ?: "")
+            val help = escapeHelp(subcommand.getAbout().orEmpty())
             segments.add("'$name:$help' \\")
         }
 
@@ -245,7 +245,7 @@ object Zsh : Generator {
                         .filter { !it.isHideSet() }
                         .joinToString("\n") { value ->
                             val name = escapeValue(value.getName())
-                            val tooltip = escapeHelp(value.getHelp()?.toString() ?: "")
+                            val tooltip = escapeHelp(value.getHelp()?.toString().orEmpty())
                             "$name\\:\"$tooltip\""
                         }
                 "(($formatted))"
@@ -275,7 +275,7 @@ object Zsh : Generator {
         val ret = mutableListOf<String>()
 
         for (o in Utils.opts(p)) {
-            val help = escapeHelp(o.getHelp() ?: "")
+            val help = escapeHelp(o.getHelp().orEmpty())
             val conflicts = argConflicts(p, o, pGlobal)
             val multiple = if (o.getAction() == ArgAction.Count || o.getAction() == ArgAction.Append) "*" else ""
             val vn = o.getValueName() ?: " "
@@ -319,7 +319,7 @@ object Zsh : Generator {
         val ret = mutableListOf<String>()
 
         for (f in Utils.flags(p)) {
-            val help = escapeHelp(f.getHelp() ?: "")
+            val help = escapeHelp(f.getHelp().orEmpty())
             val conflicts = argConflicts(p, f, pGlobal)
             val multiple = if (f.getAction() == ArgAction.Count || f.getAction() == ArgAction.Append) "*" else ""
 
@@ -352,14 +352,14 @@ object Zsh : Generator {
                     ":"
                 }
 
-            val help = arg.getHelp()?.let { " -- $it" } ?: ""
+            val help = arg.getHelp()?.let { " -- $it" }.orEmpty()
             val escapedHelp =
                 help
                     .replace("[", "\\[")
                     .replace("]", "\\]")
                     .replace("'", "'\\''")
                     .replace(":", "\\:")
-            val vc = valueCompletion(arg) ?: ""
+            val vc = valueCompletion(arg).orEmpty()
 
             ret.add("'$cardinality:${arg.getId()}$escapedHelp:$vc' \\")
         }

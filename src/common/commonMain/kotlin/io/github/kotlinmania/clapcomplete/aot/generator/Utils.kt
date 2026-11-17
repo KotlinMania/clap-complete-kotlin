@@ -14,9 +14,9 @@ object Utils {
      */
     fun allSubcommands(cmd: Command, parentBinName: String = cmd.getName()): List<Pair<String, String>> {
         val subcmds = mutableListOf<Pair<String, String>>()
+        subcmds.addAll(subcommands(cmd, parentBinName))
         for (sc in cmd.getSubcommands()) {
             val scBinName = "$parentBinName ${sc.getName()}"
-            subcmds.add(sc.getName() to scBinName)
             subcmds.addAll(allSubcommands(sc, scBinName))
         }
         return subcmds
@@ -43,6 +43,9 @@ object Utils {
         for (sc in cmd.getSubcommands()) {
             val scBinName = "$parentBinName ${sc.getName()}"
             subcmds.add(sc.getName() to scBinName)
+            for (alias in sc.getVisibleAliases()) {
+                subcmds.add(alias to scBinName)
+            }
         }
         return subcmds
     }
@@ -100,26 +103,4 @@ object Utils {
         val pv = arg.getPossibleValues()
         return if (pv.isEmpty()) null else pv
     }
-
-    fun commonApp(): Command =
-        Command
-            .new("myapp")
-            .subcommand(
-                Command
-                    .new("test")
-                    .subcommand(Command.new("config"))
-                    .arg(
-                        Arg
-                            .new("file")
-                            .short('f')
-                            .visibleShortAlias('p')
-                            .long("file")
-                            .action(io.github.kotlinmania.clap.ArgAction.SetTrue)
-                            .visibleAlias("path"),
-                    ),
-            ).subcommand(Command.new("hello"))
-
-    fun built(): Command = commonApp()
-
-    fun builtWithVersion(): Command = commonApp().version("3.0")
 }

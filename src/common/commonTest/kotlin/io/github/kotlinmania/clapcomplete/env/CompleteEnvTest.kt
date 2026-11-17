@@ -51,6 +51,36 @@ class CompleteEnvTest {
     }
 
     @Test
+    fun testCompleteEnvResolvesShellPathAndDashDashArgs() {
+        val completeEnv =
+            CompleteEnv
+                .withFactory {
+                    Command
+                        .new("testcli")
+                        .subcommand(Command.new("status"))
+                }.`var`("_TESTCLI_COMPLETE")
+        val regOutput = StringBuilder()
+        val regCompleted =
+            completeEnv.tryComplete(
+                args = listOf("testcli"),
+                envLookup = { key -> if (key == "_TESTCLI_COMPLETE") "/bin/zsh" else null },
+                output = regOutput,
+            )
+        assertTrue(regCompleted)
+        assertTrue(regOutput.toString().contains("#compdef testcli"))
+
+        val compOutput = StringBuilder()
+        val compCompleted =
+            completeEnv.tryComplete(
+                args = listOf("testcli", "--", "testcli", "st"),
+                envLookup = { key -> if (key == "_TESTCLI_COMPLETE") "bash" else null },
+                output = compOutput,
+            )
+        assertTrue(compCompleted)
+        assertTrue(compOutput.toString().contains("status"))
+    }
+
+    @Test
     fun verifyCli() {
         val command =
             Command
